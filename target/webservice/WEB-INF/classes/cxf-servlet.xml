@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<!-- import导入的文件不用自己创建，这是在依赖包中的。 -->
+	<!-- Import apache CXF bean definition 固定-->    
+    <import resource="classpath:META-INF/cxf/cxf.xml" />    
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />  
+    
+     <!-- services接口配置 --> 
+	<bean id="myService" class="com.yzz.webservice.MyServiceImpl" />
+	
+	<!-- CXF 配置WebServices的服务名及访问地址 --> 
+	<!-- address参数是重点，这是webservice发布后其wsdl的相对路径，其绝对路径为应用访问路径/cxf拦截路径/address?wsdl -->
+	<jaxws:endpoint id="testService" implementor="#myService"
+		address="/testService" />
+</beans>
